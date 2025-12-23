@@ -1,13 +1,19 @@
-import express from 'express'
+import express, {Express, Request, Response} from 'express'
 import cors from 'cors'
+import authRouter from "./modules/auth/auth.routes";
+import {errorMiddleware} from "./middleware/error.middleware";
 
-const app = express()
+const app: Express = express()
 
 app.use(cors())
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(errorMiddleware)
 
-app.get('/', (req, res) => {
-    return res.json({ message: 'API is running' })
+app.use('/api/v1/auth', authRouter)
+
+app.get('/', (request: Request, response: Response) => {
+    return response.json({ message: 'API is running' })
 })
 
 export default app

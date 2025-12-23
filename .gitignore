@@ -13,3 +13,6 @@ dist/
 
 #IDE Files
 .idea
+
+#Winston
+logs
